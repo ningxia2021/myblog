@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 定义映射关系，关联dao层被@Mapper接口  -->
+<!-- namespace 是用来关联的全路径-->
+<mapper namespace = "com.example.demo.Dao.BlogMapper">
+    <!--  表-实体 映射关系  -->
+    <resultMap id="resultBaseMap" type="com.example.demo.model.Blog">
+        <id column="blogId" property="blogId"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="postTime" property="postTime"/>
+        <result column="userId" property="userId"/>
+    </resultMap>
+
+</mapper>
