@@ -5,7 +5,7 @@
 
 <!-- 定义映射关系，关联dao层被@Mapper接口  -->
 <!-- namespace 是用来关联的全路径-->
-<mapper namespace = "com.example.demo.Dao.BlogMapper">
+<mapper namespace="com.example.demo.Dao.BlogMapper">
     <!--  表-实体 映射关系  -->
     <resultMap id="resultBaseMap" type="com.example.demo.model.Blog">
         <id column="blogId" property="blogId"/>
@@ -14,5 +14,25 @@
         <result column="postTime" property="postTime"/>
         <result column="userId" property="userId"/>
     </resultMap>
+
+    <!--新增一个博客-->
+    <insert id="addBlog" parameterType="com.example.demo.model.Blog">
+        insert into blog values (#{blogId},#{title},#{content},#{postTime},#{userId});
+    </insert>
+
+    <!--根据博客id删除博客-->
+    <delete id="deleteByBlogId" parameterType="java.lang.Integer">
+        delete from blog where blogId = #{id};
+    </delete>
+
+    <!--获取到所有博客列表-->
+    <select id="selectAllBlog" resultMap="resultBaseMap">
+        select * from blog;
+    </select>
+
+    <!--根据博客id获取指定博客-->
+    <select id="selectByBlogId" parameterType="java.lang.Integer" resultType="com.example.demo.model.Blog">
+        select * from blog where blogId = #{id};
+    </select>
 
 </mapper>
