@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客列表页</title>
+<!--  引入公有样式  -->
+    <link rel="stylesheet" href="../css/common.css">
+<!--  引入博客列表页的样式  -->
+    <link rel="stylesheet" href="../css/blog_list.css">
+<!--  引入Vue  -->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="nav">
+        <!-- logo -->
+        <img src="../img/tree.jpg" alt="logo">
+        <!-- title -->
+        <span class="title">我的博客系统</span>
+        <!-- 展位空格 -->
+        <span class="space"></span>
+        <!-- 右侧的几个链接 -->
+        <a href="blog_list.html">主页</a>
+        <a href="blog.edit.html">写博客</a>
+        <a href="logout">注销</a>
+    </div>
+
+    <!-- 版心 -->
+    <div class="container">
+        <!-- 左侧个人信息 -->
+        <div class="left">
+            <div class="card">
+                <!-- 用户头像 -->
+                <img src="../img/lake.jpg" alt="个人头像">
+                <!-- 用户姓名 -->
+                <h2 th:text="username">一条大菜狗</h2>
+                <!-- github -->
+                <a href="http://github.com">http://github.com</a>
+                <!-- 统计信息 -->
+                <div class="counter">
+                    <span>文章</span>
+                    <span>分类</span>
+                </div>
+                <div class="counter">
+                    <span>01</span>
+                    <span>02</span>
+                </div>
+            </div>
+        </div>
+        <!-- 右侧内容详情 -->
+        <div class="right">
+            <!-- 每一篇blog 就是一片博客区域 -->
+            <div class="blog" th:each="blog:${blogs}">
+                <!-- 博客标题 -->
+                <div class="title" th:text="${blog.title}"></div>
+                <!-- 创建时间 -->
+                <div class="data" th:text="${blog.postTime}"></div>
+                <!-- 博客摘要 -->
+                <div class="desc" th:text="${blog.content}">
+                </div>
+                <!-- 查看详情按钮 -->
+                <a th:href="${'blog_detail.html?blogId=' + blog.blogId}" class="detail">
+                    查看全文&gt;&gt;
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

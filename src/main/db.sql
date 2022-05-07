@@ -17,7 +17,7 @@ create table blog(
 drop table if exists user;
 create table user(
     userId int primary key auto_increment,
-    username varchar(128),
+    username varchar(128) unique ,
     password varchar(128)
 );
 

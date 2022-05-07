@@ -13,10 +13,18 @@
     </resultMap>
 <!-- 新建用户 -->
     <insert id="addUser" parameterType="com.example.demo.model.User">
-        insert into user values(#{userid},#{username},#{password});
+        insert into user values(#{userId},#{username},#{password});
     </insert>
 <!--  查询所有用户信息  -->
     <select id="selectUserAll" resultType="com.example.demo.model.User">
         select * from user;
+    </select>
+<!--  根据用户名查找用户对象  -->
+    <select id="selectUserByUsername" resultType="com.example.demo.model.User">
+        select * from user where username = #{username};
+    </select>
+<!--    根据id查找用户信息-->
+    <select id="selectUserById" resultType="com.example.demo.model.User">
+        select * from user where userId = #{userId};
     </select>
 </mapper>

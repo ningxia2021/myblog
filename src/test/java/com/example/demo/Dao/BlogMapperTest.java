@@ -5,36 +5,39 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 
 @SpringBootTest
 class BlogMapperTest {
 
-    @Autowired
+    @Resource
     private BlogMapper blogMapper;
 
     @Test
     void addBlog() {
         Blog blog = new Blog();
-        blog.setBlogId(2);
+//        blog.setBlogId(0);
         blog.setTitle("Test-Mybatis-Function");
-        blog.setContent("第二次尝试测试");
-        blog.setUserId(2);
+        blog.setContent("第三次尝试测试");
+        blog.setUserId(5);
+        blog.setPostTime(new Timestamp(System.currentTimeMillis()));
         blogMapper.addBlog(blog);
     }
 
     @Test
     void selectAllBlog() {
         List<Blog> blogs = blogMapper.selectAllBlog();
+        System.out.println("========================");
         blogs.forEach(System.out::println);
+        System.out.println("========================");
     }
 
     @Test
     void selectByBlogId() {
-        Blog blog = blogMapper.selectByBlogId(1);
+        Blog blog = blogMapper.selectByBlogId(4);
         System.out.println(blog);
     }
 
