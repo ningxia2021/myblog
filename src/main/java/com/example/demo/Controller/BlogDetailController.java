@@ -24,10 +24,15 @@ public class BlogDetailController {
      */
     @GetMapping("/blog_detail.html")
     public String BlogDetail(@RequestParam(name = "blogId" , required = false) Integer blogId,Model model) {
+//        检测id是否传入
         if (blogId == null || blogId.equals("")){
-
+            return "../Error/error_blogIdLost";
         }
         Blog blog = blogMapper.selectByBlogId(blogId);
+//        检测是否为有效id
+        if (blog == null){
+            return "../Error/error_blogLost";
+        }
         model.addAttribute("blog",blog);
         return "blog_detail";
     }

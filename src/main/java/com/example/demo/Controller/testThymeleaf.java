@@ -9,11 +9,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 测试 Thymeleaf 可用
  */
 @Controller
-@RequestMapping("/test")
+
 public class testThymeleaf {
 
-//    @RequestMapping(value = "/hello",method = RequestMethod.GET)
-    @GetMapping("/qw")
+    @GetMapping("/test")
     public String hello(Model model){
         //存入数据
         model.addAttribute("msg","测试 Thymeleaf 可用");
