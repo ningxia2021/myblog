@@ -16,6 +16,9 @@ public interface BlogMapper {
 //  根据博客id获取指定博客
     Blog selectByBlogId(int id);
 
+//   根据用户id查询博客
+    List<Blog> selectByUserId(int id);
+
 //  根据博客id删除博客
     void deleteByBlogId(int id);
 }

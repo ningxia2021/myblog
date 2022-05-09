@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/blog_login.css">
     <!--引入Vue-->
     <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -31,7 +32,7 @@
             <div class="title">
                 <h2>登 录</h2>
             </div>
-            <form action="bloglogin" method="post">
+            <form action="/login" method="post">
                 <div class="row">
                     <span>用 户</span>
                     <input type="text" id="username" name="username">
@@ -42,7 +43,7 @@
                 </div>
                 <div class="row">
                     <input type="submit" value="提交" id="submit">
-                    <input type="submit" value="注册" id="reg">
+                    <input type="button" value="注册" id="reg">
                 </div>
             </form>
         </div>

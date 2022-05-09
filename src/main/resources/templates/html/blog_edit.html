@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>博客编辑</title>
-    <link rel="stylesheet" href="../../static/css/common.css">
-    <link rel="stylesheet" href="../../static/css/blog_edit.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/blog_edit.css">
     <!-- 引入 editor.md 的依赖 -->
-    <link rel="stylesheet" href="../../static/editor.md-master/editor.md-master/css/editormd.min.css" />
+    <link rel="stylesheet" href="../editor.md-master/editor.md-master/css/editormd.min.css" />
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="../../static/editor.md-master/editor.md-master/lib/marked.min.js"></script>
-    <script src="../../static/editor.md-master/editor.md-master/lib/prettify.min.js"></script>
-    <script src="../../static/editor.md-master/editor.md-master/editormd.js"></script>
+    <script src="../editor.md-master/editor.md-master/lib/marked.min.js"></script>
+    <script src="../editor.md-master/editor.md-master/lib/prettify.min.js"></script>
+    <script src="../editor.md-master/editor.md-master/editormd.js"></script>
 </head>
 </head>
 <body>
 <!-- 导航栏 -->
 <div class="nav">
     <!-- logo -->
-    <img src="../../static/img/tree.jpg" alt="logo">
+    <img src="../img/tree.jpg" alt="logo">
     <!-- title -->
     <span class="title">我的博客系统</span>
     <!-- 展位空格 -->
@@ -30,15 +30,18 @@
 
 <!-- 博客编辑容器 -->
 <div class="blog_edit_container">
-    <!--标题栏-->
-    <div class="title">
-        <input type="text">
-        <button>发布文章</button>
-    </div>
-<!--  markdown 编辑器标签-->
-    <div id="editor">
-
-    </div>
+    <form action="blog_edit" method="POST" style="height: 100%">
+        <!--标题栏-->
+        <div class="title">
+            <input type="text" name="title" id="title">
+            <input type="submit" id="submit" value="发布文章">
+        </div>
+        <!--  markdown 编辑器标签-->
+        <div id="editor">
+            <!-- 这里加上一个隐藏的textarea，为了表单提交构造数据 -->
+            <textarea name="content" style="display: none"></textarea>
+        </div>
+    </form>
 </div>
 
 <script>
@@ -51,7 +54,9 @@
         // 编辑器中的初始内容
         markdown: "# 在这里写下一篇博客",
         // 指定 editor.md 依赖的插件路径
-        path: "../editor.md-master/editor.md-master/lib/"
+        path: "../editor.md-master/editor.md-master/lib/",
+        // 加上这个选项，让editor.md中的内容实时的存储进用户定义的textarea中
+        saveHTMLToTextarea:true,
     });
 </script>
 </body>

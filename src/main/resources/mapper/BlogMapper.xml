@@ -34,5 +34,8 @@
     <select id="selectByBlogId" parameterType="java.lang.Integer" resultType="com.example.demo.model.Blog">
         select * from blog where blogId = #{id};
     </select>
+    <select id="selectByUserId" resultMap="resultBaseMap">
+        select * from blog where userId = #{id};
+    </select>
 
 </mapper>
