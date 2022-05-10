@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="../css/blog_detail.css">
 <!--  引入Vue  -->
     <script type="text/javascript" src="../js/vue.js"></script>
+    <!-- 引入 editor.md 的依赖 -->
+    <link rel="stylesheet" href="../editor.md-master/editor.md-master/css/editormd.min.css" />
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="../editor.md-master/editor.md-master/lib/marked.min.js"></script>
+    <script src="../editor.md-master/editor.md-master/lib/prettify.min.js"></script>
+    <script src="../editor.md-master/editor.md-master/editormd.js"></script>
 </head>
 <body>
     <!-- 导航栏 -->
@@ -24,8 +30,9 @@
         <span class="space"></span>
         <!-- 右侧的几个链接 -->
         <a href="blog_list.html">主页</a>
-        <a href="blog.edit.html">写博客</a>
+        <a href="blog_edit.html">写博客</a>
         <a href="logout">注销</a>
+        <a th:href="${'del?blogId='+blog.blogId}">删除</a>
     </div>
 
     <!-- 加入版心布局 -->
@@ -36,28 +43,47 @@
                 <!-- 用户头像 -->
                 <img src="../img/lake.jpg" alt="个人头像">
                 <!-- 用户姓名 -->
-                <h2>一条大菜狗</h2>
+                <h2 th:text="${username}"></h2>
                 <!-- github -->
-                <a href="http://github.com">http://github.com</a>
+                <a href="https://github.com/ningxia2021">我的GitHub</a>
                 <!-- 统计信息 -->
                 <div class="counter">
                     <span>文章</span>
                     <span>分类</span>
                 </div>
                 <div class="counter">
-                    <span>01</span>
+                    <span th:text="${blogNum}"></span>
                     <span>02</span>
                 </div>
             </div>
         </div>
     <!-- 右侧为博客详情内容 -->
         <div class="right">
+            <!-- 这个 div 对应博客详情的整个部分 -->
             <div class="blog_content">
+                <!-- 博客标题 -->
                 <h2 th:text="${blog.title}"></h2>
+                <!-- 博客发布时间 -->
                 <div class="date" th:text="${blog.postTime}"></div>
-                <div class="centent" th:text="${blog.content}"></div>
+                <!-- 博客正文, 这个 div 里面就保存了 markdown 的原始内容 -->
+                <div id="content" th:text="${blog.content}" style="background-color: transparent;"></div>
             </div>
         </div>
     </div>
+    <script>
+        function renderMD() {
+            function renderMD() {
+                let contentDiv = document.querySelector('#content');
+                let markdown = contentDiv.innerHTML;
+                // 要把 contentDiv 里的内容先清空
+                contentDiv.innerHTML = '';
+                editormd.markdownToHTML('content', {
+                    markdown: markdown
+                });
+            }
+            renderMD();
+        }
+        renderMD();
+    </script>
 </body>
 </html>

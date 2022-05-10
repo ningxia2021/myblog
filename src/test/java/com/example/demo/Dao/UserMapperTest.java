@@ -5,17 +5,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.annotation.Resource;
+
 import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class UserMapperTest {
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
     @Test
     void addUser() {
         User user = new User();
-        user.setUsername("lisi");
-        user.setPassword("14");
+        user.setUsername("一条大菜狗");
+        user.setPassword("123");
         userMapper.addUser(user);
         System.out.println("==============================");
         System.out.println(user);
@@ -35,7 +37,7 @@ class UserMapperTest {
 
     @Test
     void selectUserById() {
-        User user = userMapper.selectUserById(4);
+        User user = userMapper.selectUserById(0);
         System.out.println("==============================");
         System.out.println(user);
         System.out.println("==============================");

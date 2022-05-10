@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import java.util.List;
 
 import static com.example.demo.common.util.checkLoginStatus;
 
@@ -39,11 +42,15 @@ public class BlogDetailController {
             return "../Error/error_blogIdLost";
         }
         Blog blog = blogMapper.selectByBlogId(blogId);
+        List<Blog> blogs = blogMapper.selectByUserId(user.getUserId());
+        int count = blogs.size();
 //        检测是否为有效id
         if (blog == null){
             return "../Error/error_blogLost";
         }
         model.addAttribute("blog",blog);
+        model.addAttribute("username",user.getUsername());
+        model.addAttribute("blogNum",count);
         return "blog_detail";
     }
 }

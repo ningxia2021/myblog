@@ -6,11 +6,11 @@ import com.example.demo.model.Blog;
 import com.example.demo.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -21,10 +21,10 @@ public class BlogListController {
     BlogMapper blogMapper;
 
 //    这里主要就是为了渲染
-    @GetMapping("/blog_list.html")
+    @RequestMapping("/blog_list.html")
     public String bloglist(Model model, HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html,charset=utf-8");
-        //        检查用户是否已经登录
+        response.setContentType("text/html;charset=utf-8");
+        //  检查用户是否已经登录
         User user = util.checkLoginStatus(request);
         if (user == null){
             response.getWriter().write("当前用户未登录! 请登录...");
@@ -34,6 +34,12 @@ public class BlogListController {
         List<Blog> blogs = blogMapper.selectByUserId(user.getUserId());
         model.addAttribute("blogs", blogs);
         model.addAttribute("username",user.getUsername());
+        List<Blog> userBlogNum = blogMapper.selectByUserId(user.getUserId());
+        int count = 0;
+        for (Blog num : userBlogNum){
+            count++;
+        }
+        model.addAttribute("blogNum",count);
         return "blog_list";
     }
 }
